@@ -1,9 +1,22 @@
 $('#submit-survey').on('click', function submitSurvey() {
+	// console.log("button clicked")
 	var color = $("input[name=color]").val();
 	var food = $("input[name=food]").val();
 	var vacation = $("input[name=vacation]").val();
 	var feBefore = $("input[name=front-end-before]").val();
 	var feAfter = $("input[name=front-end-after]").val();
+
+	$.post('submit-survey',
+		{'color': color,
+		'food': food,
+		'vacation': vacation,
+		'feBefore': feBefore,
+		'feAfter': feAfter }
+		,
+		function(data) {
+			$(document.body.parentNode).html(data);
+		}
+	);
 });
 
 $("#site-title-wrapper").on('click', function goHome() {

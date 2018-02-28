@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% block title %}
 	Survey
@@ -17,13 +17,24 @@
 	<div class="main-container">
 		<h3>Here are some of your favorite things</h3>
 
-		<span class="result-item">Your favorite color is {{ surveyResponse['color']}}</span>
-		<span class="result-item">Your favorite food is {{ surveyResponse['food']}}</span>
-		<span class="result-item">Your favorite vacation spot is {{ surveyResponse['vacation']}}</span>
+		<span class="result-item">Your favorite color is {{ surveyResponse['color'] }}</span>
+		<span class="result-item">Your favorite food is {{ surveyResponse['food'] }}</span>
+		<span class="result-item">Your favorite vacation spot is {{ surveyResponse['vacation'] }}</span>
 
+		{% if surveyResponse['fe-before'] < surveyResponse['fe-after'] %}
 		<h3>Wow! Your front end skillz are getting sharp!</h3>
-		<span class="result-item">Before IO Lab, your front end skillz were at a {{ surveyResponse['fe-before']}}</span>
-		<span class="result-item">But in just a few short weeks of IO Lab, your front end skillz are now a {{ surveyResponse['fe-after']}}</span>
+		<span class="result-item">Before IO Lab, your front end skillz were at a {{ surveyResponse['fe-before'] }}</span>
+		<span class="result-item">But in just a few short weeks of IO Lab, your front end skillz are now a {{surveyResponse['fe-after']}}</span>
 
+		{% elif surveyResponse['fe-before'] > surveyResponse['fe-after'] %}
+		<h3>Oh no?!? What happened? It's the looks of these IO Lab Boyzz, right? So distracting....</h3>
+		<span class="result-item">Before IO Lab, your front end skillz were at a {{ surveyResponse['fe-before'] }}</span>
+		<span class="result-item">But despite several weeks of IO Lab training, your front end skillz are now a {{surveyResponse['fe-after']}}</span>
+
+		{% else %}
+		<h3>Meh.. could be worse, I guess. Despite the IO Lab Boyz' best efforts, you did not improve and remained at {{surveyResponse['fe-after']}}.</h3>
+
+
+		{% endif %}
 	</div>
 {% endblock %}
